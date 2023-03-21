@@ -1,0 +1,54 @@
+openapi: "3.0.0"
+info:
+  title: "My To-Do List API"
+  description: "This API allows users to manage their to-do lists."
+  version: "1.0.0"
+  contact:
+    name: "Lucas Garcia"
+    email: "lucasg@itcsoluciones.com"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+  termsOfService: "http://example.com/terms/"
+paths:
+  /add:
+    post:
+      tags:
+        - Tasks
+      name: add
+      summary: Add a new task
+      description: Adds a new task to the list to keep track of it
+      operationId: add_task
+      parameters:
+        - name: task
+          in: query
+          description: The title of the task
+          example: "Buy groceries"
+          required: true
+          schema:
+            type: string
+      responses:
+        302:
+          description: Redirects to the todo list page
+
+  /edit{task_id}:
+    post:
+      tags:
+        - Tasks
+      summary: edit title
+      description: change the selected task title
+      operationId: edit_task
+      parameters:
+        - name: task_id
+          in: path
+          description: ID of the task that needs update
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: new_title
+          in: query
+          description: new title for a task
+          required: true
+          schema:
+            type: text
